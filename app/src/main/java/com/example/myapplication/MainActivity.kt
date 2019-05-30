@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     editTextTask.text.toString(),
                     editTextFinishBy.text.toString(),
                     editTextDesc.text.toString()
-            ).execute()
+            ).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
         list = ArrayList()
         for (i in 0..5) {
@@ -55,15 +55,15 @@ class MainActivity : AppCompatActivity() {
         }
         Log.e(TAG, "53->" + list?.indexOf("" + 4))
         Log.e(TAG, "54->" + list?.filter({ it < "" + list!!.size }))
-        getTask(this@MainActivity).execute()
+        getTask(this@MainActivity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         btn_update.setOnClickListener {
             updateTaskbyId(this@MainActivity,
                     id,
                     TextTask.text.toString().trim(),
                     TextDesc.text.toString().trim(),
-                    TextFinishBy.text.toString().trim()).execute()
+                    TextFinishBy.text.toString().trim()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
-        btn_delete.setOnClickListener {deleteParticularid(this@MainActivity, id).execute()  }
+        btn_delete.setOnClickListener {deleteParticularid(this@MainActivity, id).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)  }
     }
 
     var list: ArrayList<String>? = null
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: Void?) {
             super.onPostExecute(result)
-            getTask(this.activity!!).execute()
+            getTask(this.activity!!).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
 
         }
 
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: Void?) {
             super.onPostExecute(result)
-            getTask(activity.get()!!).execute()
+            getTask(activity.get()!!).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
 
     }
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: Void?) {
             super.onPostExecute(result)
-            getTask(activity.get()!!).execute()
+            getTask(activity.get()!!).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
         }
     }
 
@@ -239,5 +239,3 @@ class MainActivity : AppCompatActivity() {
 enum class Mode {
     TEST, DEV, LIVE
 }
-
-
